@@ -2,11 +2,11 @@ package CajaDeCartas;
 
 import java.util.Objects;
 
-public class Card {
+public class Cartas {
     private int value;
     private String Suit;
 
-public Card(int value,String Suit){
+public Cartas(int value, String Suit){
     this.value = value;
     this.Suit = Suit;
 }
@@ -34,7 +34,7 @@ public String toString() {
 public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Card card = (Card) o;
+    Cartas card = (Cartas) o;
     return value == card.value && Objects.equals(Suit, card.Suit);
 }
 }
