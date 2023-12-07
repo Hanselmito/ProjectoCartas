@@ -8,7 +8,7 @@ public class Menu {
         int opcion;  // Declarar la variable 'opcion' aquí
 
         while (!salir) {  // Agregar un bucle while para repetir el menú hasta que 'salir' sea verdadero
-
+            System.out.println("");
             System.out.println("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
             System.out.println("1. INICIAR PARTIDA ");
             System.out.println("2. Salir");
