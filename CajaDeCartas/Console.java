@@ -99,7 +99,7 @@ public class Console {
     }
 
     private static void displayDealerCardShowing(){
-        System.out.println(" Dealer is showing: "+game.getDealer().getHand().get(0).toString());
+        System.out.println(" la maquina tiene: "+game.getDealer().getHand().get(0).toString());
     }
 
     private static void displayPlayerHandAndScore(Player userPlayer){
@@ -112,7 +112,7 @@ public class Console {
             else
                 System.out.println(card.toString());
         }
-        System.out.println(" Your current score is: " + userPlayer.calculateScore());
+        System.out.println(" ti tienes: " + userPlayer.calculateScore());
     }
 
     private static void playerBets(Player userPlayer){
@@ -136,7 +136,7 @@ public class Console {
     private static String forceDoubleInput() {
         String input;
         do {
-            System.out.print("\ncuanto quieres apostar?  ");
+            System.out.print("cuanto quieres apostar?  ");
             input = getInput();
         } while (!isInputDouble(input) || !isInputPositive(input));
         return forceTwoDecimalDouble(input);
@@ -164,7 +164,7 @@ public class Console {
     public static boolean isInputStayOrHit(String passedString)
     {
         return ("pide".equalsIgnoreCase(passedString) ||
-                "pasas".equalsIgnoreCase(passedString));
+                "paso".equalsIgnoreCase(passedString));
     }
 
     public static boolean isInputYesOrNo(String passedString)
