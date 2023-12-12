@@ -8,7 +8,7 @@ public class Card
     private Integer value;
     private String topCardRepresentation;
     private String bottomCardRepresentation;
-    private static String middleCardRepresentation="|     |";
+    private static String middleCardRepresentation="|       |";
 
     private Card(){
     }
@@ -33,10 +33,10 @@ public class Card
     public Card(Suit passedSuit, Integer passedValue, String passedSuitRepresentation, String passedFaceRepresentation){
         suit=passedSuit;
         value=passedValue;
-        topCardRepresentation=" -------"+
+        topCardRepresentation=" --------"+
                               "|"+String.format("%2s%-3s", passedFaceRepresentation, passedSuitRepresentation)+"|";
         bottomCardRepresentation="|"+String.format("%4s%s", passedFaceRepresentation, passedSuitRepresentation)+"|"+
-                                 " -------";
+                                 " --------";
     }
 
     public Integer getValue(){

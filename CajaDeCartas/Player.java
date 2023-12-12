@@ -10,7 +10,7 @@ public class Player {
 
     public Player(){
         hand = new ArrayList<Card>(2);
-        name="Player";
+        name="jugador";
         money = 500.0;
         score = 0;
     }
