@@ -11,7 +11,7 @@ public class mazo {
         populate();
     }
 
-    public Cartas getCard(){
+    public Cartas getCartas(){
         if(this.cartas.size() == 0) {
             populate();
             shuffle();
@@ -28,18 +28,18 @@ public class mazo {
 
     private void populate() {
         cartas = new ArrayList<Cartas>();
-        for (regla regla : regla.values()) {
-            for (int value = 1; value <= 13; value++)
+        for (Sinvolos Sinvolos : Sinvolos.values()) {
+            for (int valor = 1; valor <= 13; valor++)
             {
-                if (value < 11)
+                if (valor < 11)
                 {
-                    if (value==1)
-                        cartas.add(new Cartas(regla, value, Cartas.suitSymbols[regla.ordinal()], Cartas.faceSymbols[0]));
+                    if (valor==1)
+                        cartas.add(new Cartas(Sinvolos, valor, Cartas.Sinvolo[Sinvolos.ordinal()], Cartas.SinvoloDeLaCarta[0]));
                     else
-                        cartas.add(new Cartas(regla, value, Cartas.suitSymbols[regla.ordinal()], ""+value));
+                        cartas.add(new Cartas(Sinvolos, valor, Cartas.Sinvolo[Sinvolos.ordinal()], ""+valor));
                 }
                 else
-                    cartas.add(new Cartas(regla, 10, Cartas.suitSymbols[regla.ordinal()], Cartas.faceSymbols[value - 10]));
+                    cartas.add(new Cartas(Sinvolos, 10, Cartas.Sinvolo[Sinvolos.ordinal()], Cartas.SinvoloDeLaCarta[valor - 10]));
 
             }
         }

@@ -2,16 +2,16 @@ package CajaDeCartas;
 
 import java.util.ArrayList;
 /*
-*hand lo e utilizado para poder ver las cartas que tengo en el juego.
-* name el nombre que diga de poner
-* money lo busque por paginas y videos para averiguar poder jugar apostando
+*Mano lo e utilizado para poder ver las cartas que tengo en el juego.
+* Nombre el nombre que diga de poner
+* Dinero lo busque por paginas y videos para averiguar poder jugar apostando
 * score para ver la puntuacion
  */
 public class Jugador {
-    private ArrayList<Cartas> hand;
-    private String name;
-    private Double money;
-    private Integer score;
+    private ArrayList<Cartas> Mano;
+    private String Nombre;
+    private Double Dinero;
+    private Integer puntos;
 
     /*
     *ponemos un array de cartas de 2 por que empesamos en el blackjack con 2 cartas
@@ -19,61 +19,61 @@ public class Jugador {
     * y con el dinero que nos dan y la que queremos apostar
      */
     public Jugador(){
-        hand = new ArrayList<Cartas>(2);
-        name="jugador";
-        money = 500.0;
-        score = 0;
+        Mano = new ArrayList<Cartas>(2);
+        Nombre="jugador";
+        Dinero = 500.0;
+        puntos = 0;
     }
     public Jugador(Double passedMoney){
         this();
-        money=passedMoney;
+        Dinero=passedMoney;
     }
-    public Jugador(String name, Double passedMoney){
+    public Jugador(String Nombre, Double pasasMoney){
         this();
-        money=passedMoney;
-        this.name=name;
+        Dinero=pasasMoney;
+        this.Nombre=Nombre;
     }
-    public Jugador(String name) {
+    public Jugador(String Nombre) {
         this();
-        this.name = name;
+        this.Nombre = Nombre;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return Nombre;
     }
 
-    public void setName(String name){
-        this.name = name;
+    public void setNombre(String Nombre){
+        this.Nombre = Nombre;
     }
 
-    public Double getMoney() {
-        return money;
+    public Double getDinero() {
+        return Dinero;
     }
 
-    public Integer getScore() {
-        return score;
+    public Integer getpuntos() {
+        return puntos;
     }
 
-    public ArrayList<Cartas> getHand() {
-        return hand;
+    public ArrayList<Cartas> getmanos() {
+        return Mano;
     }
 
     // blackjack hit
     public void addToHand(Cartas cartas) {
-        hand.add(cartas);
+        Mano.add(cartas);
     }
 
     public boolean hasMoneyToMakeBet(Double amount) {
-        return (amount <= money);
+        return (amount <= Dinero);
     }
 
-    public void makeBet(Double amount) {
-        money -= amount;
+    public void makeBet(Double amontonar) {
+        Dinero -= amontonar;
     }
 
     public boolean isAceInHand() {
-        for(Cartas cartas : hand) {
-            if(cartas.getValue() == 1) {
+        for(Cartas cartas : Mano) {
+            if(cartas.getValor() == 1) {
                 return true;
             }
         }
@@ -83,21 +83,21 @@ public class Jugador {
     /*
     *y para calcular la puntuacion de cada partida que hagamos
      */
-    public Integer calculateScore() {
+    public Integer calculatePuntos() {
         int sum = 0;
-        for(Cartas cartas : hand) {
-            sum += cartas.getValue();
+        for(Cartas cartas : Mano) {
+            sum += cartas.getValor();
         }
 
         if(isAceInHand() && sum <= 11) {
             sum += 10;
         }
-        score = sum;
+        puntos = sum;
 
         return sum;
     }
 
     public void receiveWinnings(Double amount) {
-        money += amount;
+        Dinero += amount;
     }
 }

@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class consola {
 
-    private static final double MIN_BET_ALLOWED=0.01;
+    private static final double Apuesta_Minima=0.20;
 
     private static Juego juego = new Juego();
     private static Scanner scanner = new Scanner (System.in);
 
     public static void run(){
 
-        Jugador userJugador = juego.getPlayer();
+        Jugador usuarioJugador = juego.getPlayer();
 
         System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
         System.out.println("|                                          |");
@@ -22,29 +22,29 @@ public class consola {
         System.out.println(" vien venido jugador cual es tu nombre ");
 
         String userName = getInput();
-        userJugador.setName(userName);
+        usuarioJugador.setNombre(userName);
 
         System.out.println(" Hola " + userName + "!");
 
-        System.out.println(" tienes "+forceTwoDecimalDouble(userJugador.getMoney().toString()));
+        System.out.println(" tienes "+forceTwoDecimalDouble(usuarioJugador.getDinero().toString()));
 
         do {
             juego.start();
-            playerBets(userJugador);
-            displayPlayerHandAndScore(userJugador);
+            playerBets(usuarioJugador);
+            displayPlayerHandAndScore(usuarioJugador);
             displayDealerCardShowing();
-            playerHitsOrStays(userJugador);
+            playerHitsOrStays(usuarioJugador);
             juego.dealerHitUntilFinished();
-            determineWinOrLoss(userJugador);
-        } while (playerStaysForAnotherRound(userJugador));
+            DeterminaGana0Pierde(usuarioJugador);
+        } while (playerStaysForAnotherRound(usuarioJugador));
 
         System.out.println("Gracias por jugar👨‍🦽! Adios!");
     }
 
-    private static boolean playerStaysForAnotherRound(Jugador userJugador) {
+    private static boolean playerStaysForAnotherRound(Jugador usuarioJugador) {
         String input;
-        System.out.println(" tu tienes " + forceTwoDecimalDouble(userJugador.getMoney().toString()));
-        if (userJugador.getMoney() >= 0.01) {
+        System.out.println(" tu tienes " + forceTwoDecimalDouble(usuarioJugador.getDinero().toString()));
+        if (usuarioJugador.getDinero() >= 0.20) {
             do {
                 System.out.print("quieres probar de nuevo? [si/No]  ");
                 input = getInput();
@@ -61,32 +61,32 @@ public class consola {
         return false;
     }
 
-    private static void determineWinOrLoss(Jugador userJugador){
+    private static void DeterminaGana0Pierde(Jugador usuarioJugador){
 
         if (juego.playerWins()) {
             System.out.println(" tu ganas !");
         } else {
             System.out.println(" la maquina gana !");
         }
-        System.out.println(" la maquina tiene: " + juego.getDealer().getScore());
-        resetPotAndDiscardHands(userJugador);
+        System.out.println(" la maquina tiene: " + juego.getDealer().getpuntos());
+        resetPotAndDiscardHands(usuarioJugador);
     }
 
-    private static void resetPotAndDiscardHands(Jugador userJugador){
+    private static void resetPotAndDiscardHands(Jugador usuarioJugador){
         juego.returnBet();
-        userJugador.getHand().clear();
-        juego.getDealer().getHand().clear();
+        usuarioJugador.getmanos().clear();
+        juego.getDealer().getmanos().clear();
     }
 
-    private static void playerHitsOrStays(Jugador userJugador){
+    private static void playerHitsOrStays(Jugador usuarioJugador){
         String input;
         do {
             input=forceHitOrStay();
             if ("pide".equalsIgnoreCase(input)) {
-                juego.dealCard(userJugador);
+                juego.dealCard(usuarioJugador);
             }
-            displayPlayerHandAndScore(userJugador);
-        } while ("pide".equalsIgnoreCase(input) && (userJugador.calculateScore() <= 21));
+            displayPlayerHandAndScore(usuarioJugador);
+        } while ("pide".equalsIgnoreCase(input) && (usuarioJugador.calculatePuntos() <= 21));
     }
 
     private static String forceHitOrStay(){
@@ -99,37 +99,37 @@ public class consola {
     }
 
     private static void displayDealerCardShowing(){
-        System.out.println(" la maquina tiene: "+ juego.getDealer().getHand().get(0).toString());
+        System.out.println(" la maquina tiene: "+ juego.getDealer().getmanos().get(0).toString());
     }
 
-    private static void displayPlayerHandAndScore(Jugador userJugador){
+    private static void displayPlayerHandAndScore(Jugador usuarioJugador){
         Cartas cartas;
-        for (int i = 0; i< userJugador.getHand().size(); i++)
+        for (int i = 0; i< usuarioJugador.getmanos().size(); i++)
         {
-            cartas = userJugador.getHand().get(i);
-            if (i!= userJugador.getHand().size()-1)
+            cartas = usuarioJugador.getmanos().get(i);
+            if (i!= usuarioJugador.getmanos().size()-1)
                 System.out.print(cartas.getTopCardRepresentation());
             else
                 System.out.println(cartas.toString());
         }
-        System.out.println(" ti tienes: " + userJugador.calculateScore());
+        System.out.println(" ti tienes: " + usuarioJugador.calculatePuntos());
     }
 
-    private static void playerBets(Jugador userJugador){
+    private static void playerBets(Jugador usuarioJugador){
         Double betAmount;
         String input;
-        input=forcePlayerBet(userJugador);
+        input=forcePlayerBet(usuarioJugador);
         betAmount=Double.valueOf(input);
-        userJugador.makeBet(betAmount);
+        usuarioJugador.makeBet(betAmount);
         juego.addToPot(betAmount);
     }
 
-    private static String forcePlayerBet(Jugador userJugador){
+    private static String forcePlayerBet(Jugador usuarioJugador){
         String input;
         do {
             input=forceDoubleInput();
         }
-        while (!userJugador.hasMoneyToMakeBet(Double.valueOf(input)));
+        while (!usuarioJugador.hasMoneyToMakeBet(Double.valueOf(input)));
         return (input);
     }
 
@@ -148,7 +148,7 @@ public class consola {
     }
 
     public static boolean isInputPositive(String passedString){
-        return Double.valueOf(passedString)>=MIN_BET_ALLOWED;
+        return Double.valueOf(passedString)>=Apuesta_Minima;
     }
 
     public static boolean isInputDouble(String passedString)

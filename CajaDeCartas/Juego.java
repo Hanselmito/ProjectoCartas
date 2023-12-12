@@ -47,12 +47,12 @@ public class Juego {
         // si la puntuación tanto del jugador como de la casa es superior a 21, entonces la casa gana
         // si la puntuación del jugador es <= 21 y la puntuación de los jugadores es mayor que la puntuación de la casa, entonces el jugador gana.
         //si la puntuación de la casa es > 21 y la puntuación del jugador es <= 21, entonces el jugador gana.
-        jugador.calculateScore();
-        dealer.calculateScore();
+        jugador.calculatePuntos();
+        dealer.calculatePuntos();
 
-        if(     (jugador.getScore().equals(21) && !dealer.getScore().equals(21)) ||
-                (jugador.getScore()<21 && dealer.getScore() < jugador.getScore()) ||
-                (jugador.getScore() < 21 && dealer.getScore() > 21)) {
+        if(     (jugador.getpuntos().equals(21) && !dealer.getpuntos().equals(21)) ||
+                (jugador.getpuntos()<21 && dealer.getpuntos() < jugador.getpuntos()) ||
+                (jugador.getpuntos() < 21 && dealer.getpuntos() > 21)) {
             //jugador gana
             return true;
         }
@@ -61,12 +61,12 @@ public class Juego {
     }
 
     public void dealCard(Jugador jugadorToReceiveCard){
-        Cartas cartas = mazo.getCard();
+        Cartas cartas = mazo.getCartas();
         jugadorToReceiveCard.addToHand(cartas);
     }
 
     public void dealerHitUntilFinished() {
-        while (dealer.calculateScore() <= 17)
+        while (dealer.calculatePuntos() <= 17)
         {
             dealCard(dealer);
         }

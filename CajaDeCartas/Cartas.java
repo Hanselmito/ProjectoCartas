@@ -5,49 +5,49 @@ public class Cartas
     /*
     *la creacion de las cartas con formas de formalas con otros metodos que e encotrado.
      */
-    private regla regla;
-    public static String[] suitSymbols = {"♡", "♢", "♧", "♤"};
-    public static String[] faceSymbols = {"A", "J", "Q", "K"};
-    private Integer value;
-    private String topCardRepresentation;
-    private String bottomCardRepresentation;
-    private static String middleCardRepresentation="|     |";
+    private Sinvolos Sinvolos;
+    public static String[] Sinvolo = {"♡", "♢", "♧", "♤"};
+    public static String[] SinvoloDeLaCarta = {"A", "J", "Q", "K"};
+    private Integer valor;
+    private String EnsimaCarta;
+    private String BajoCarta;
+    private static String EnmedioCarta="|     |";
 
     private Cartas(){
     }
 
     @Override
     public String toString(){
-        return topCardRepresentation+middleCardRepresentation+bottomCardRepresentation;
+        return EnsimaCarta+EnmedioCarta+BajoCarta;
     }
     public String getTopCardRepresentation(){
-        return topCardRepresentation;
+        return EnsimaCarta;
     }
 
 
-    public Cartas(regla passedRegla, Integer passedValue){
+    public Cartas(Sinvolos ponerSinvolos, Integer ponerValor){
 
-        this(passedRegla, passedValue, "X");
+        this(ponerSinvolos, ponerValor, "X");
     }
-    public Cartas(regla passedRegla, Integer passedValue, String passedSuitRepresentation){
+    public Cartas(Sinvolos ponerSinvolos, Integer ponerValor, String PonerRepresentacionSimvolos){
 
-        this(passedRegla, passedValue, passedSuitRepresentation, "Y");
+        this(ponerSinvolos, ponerValor, PonerRepresentacionSimvolos, "Y");
     }
-    public Cartas(regla passedRegla, Integer passedValue, String passedSuitRepresentation, String passedFaceRepresentation){
-        regla = passedRegla;
-        value=passedValue;
-        topCardRepresentation=" ----- "+
-                              "|"+String.format("%2s%-3s", passedFaceRepresentation, passedSuitRepresentation)+"|";
-        bottomCardRepresentation="|"+String.format("%4s%s", passedFaceRepresentation, passedSuitRepresentation)+"|"+
+    public Cartas(Sinvolos ponerSinvolos, Integer ponerValor, String PonerRepresentacionSimvolos, String PonerRepresentacionDeLaCara){
+        Sinvolos = ponerSinvolos;
+        valor=ponerValor;
+        EnsimaCarta=" ----- "+
+                              "|"+String.format("%2s%-3s", PonerRepresentacionDeLaCara, PonerRepresentacionSimvolos)+"|";
+        BajoCarta="|"+String.format("%4s%s", PonerRepresentacionDeLaCara, PonerRepresentacionSimvolos)+"|"+
                                  " ----- ";
     }
 
-    public Integer getValue(){
-        return value;
+    public Integer getValor(){
+        return valor;
     }
 
-    public regla getSuit(){
-        return regla;
+    public Sinvolos getSinvolos(){
+        return Sinvolos;
     }
 
 }
