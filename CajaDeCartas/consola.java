@@ -19,7 +19,7 @@ public class consola {
         System.out.println("|                                          |");
         System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
 
-        System.out.println(" bien benido jugador cual es tu nombre ");
+        System.out.println(" vien venido jugador cual es tu nombre ");
 
         String userName = getInput();
         userJugador.setName(userName);
