@@ -1,13 +1,23 @@
 package CajaDeCartas;
 
 import java.util.ArrayList;
-
+/*
+*hand lo e utilizado para poder ver las cartas que tengo en el juego.
+* name el nombre que diga de poner
+* money lo busque por paginas y videos para averiguar poder jugar apostando
+* score para ver la puntuacion
+ */
 public class Player {
     private ArrayList<Card> hand;
     private String name;
     private Double money;
     private Integer score;
 
+    /*
+    *ponemos un array de cartas de 2 por que empesamos en el blackjack con 2 cartas
+    * el nombre del jugador
+    * y con el dinero que nos dan y la que queremos apostar
+     */
     public Player(){
         hand = new ArrayList<Card>(2);
         name="jugador";
@@ -70,6 +80,9 @@ public class Player {
         return false;
     }
 
+    /*
+    *y para calcular la puntuacion de cada partida que hagamos
+     */
     public Integer calculateScore() {
         int sum = 0;
         for(Card card: hand) {

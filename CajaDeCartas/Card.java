@@ -2,6 +2,9 @@ package CajaDeCartas;
 
 public class Card
 {
+    /*
+    *la creacion de las cartas con formas de formalas con otros metodos que e encotrado.
+     */
     private Suit suit;
     public static String[] suitSymbols = {"♡", "♢", "♧", "♤"};
     public static String[] faceSymbols = {"A", "J", "Q", "K"};
