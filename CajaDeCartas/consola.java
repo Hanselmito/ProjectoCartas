@@ -2,16 +2,16 @@ package CajaDeCartas;
 
 import java.util.Scanner;
 
-public class Console {
+public class consola {
 
     private static final double MIN_BET_ALLOWED=0.01;
 
-    private static Game game = new Game();
+    private static Juego juego = new Juego();
     private static Scanner scanner = new Scanner (System.in);
 
     public static void run(){
 
-        Player userPlayer = game.getPlayer();
+        Jugador userJugador = juego.getPlayer();
 
         System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
         System.out.println("|                                          |");
@@ -22,29 +22,29 @@ public class Console {
         System.out.println(" bien benido jugador cual es tu nombre ");
 
         String userName = getInput();
-        userPlayer.setName(userName);
+        userJugador.setName(userName);
 
         System.out.println(" Hola " + userName + "!");
 
-        System.out.println(" tienes "+forceTwoDecimalDouble(userPlayer.getMoney().toString()));
+        System.out.println(" tienes "+forceTwoDecimalDouble(userJugador.getMoney().toString()));
 
         do {
-            game.start();
-            playerBets(userPlayer);
-            displayPlayerHandAndScore(userPlayer);
+            juego.start();
+            playerBets(userJugador);
+            displayPlayerHandAndScore(userJugador);
             displayDealerCardShowing();
-            playerHitsOrStays(userPlayer);
-            game.dealerHitUntilFinished();
-            determineWinOrLoss(userPlayer);
-        } while (playerStaysForAnotherRound(userPlayer));
+            playerHitsOrStays(userJugador);
+            juego.dealerHitUntilFinished();
+            determineWinOrLoss(userJugador);
+        } while (playerStaysForAnotherRound(userJugador));
 
         System.out.println("Gracias por jugar👨‍🦽! Adios!");
     }
 
-    private static boolean playerStaysForAnotherRound(Player userPlayer) {
+    private static boolean playerStaysForAnotherRound(Jugador userJugador) {
         String input;
-        System.out.println(" tu tienes " + forceTwoDecimalDouble(userPlayer.getMoney().toString()));
-        if (userPlayer.getMoney() >= 0.01) {
+        System.out.println(" tu tienes " + forceTwoDecimalDouble(userJugador.getMoney().toString()));
+        if (userJugador.getMoney() >= 0.01) {
             do {
                 System.out.print("quieres probar de nuevo? [si/No]  ");
                 input = getInput();
@@ -61,32 +61,32 @@ public class Console {
         return false;
     }
 
-    private static void determineWinOrLoss(Player userPlayer){
+    private static void determineWinOrLoss(Jugador userJugador){
 
-        if (game.playerWins()) {
+        if (juego.playerWins()) {
             System.out.println(" tu ganas !");
         } else {
             System.out.println(" la maquina gana !");
         }
-        System.out.println(" la maquina tiene: " + game.getDealer().getScore());
-        resetPotAndDiscardHands(userPlayer);
+        System.out.println(" la maquina tiene: " + juego.getDealer().getScore());
+        resetPotAndDiscardHands(userJugador);
     }
 
-    private static void resetPotAndDiscardHands(Player userPlayer){
-        game.returnBet();
-        userPlayer.getHand().clear();
-        game.getDealer().getHand().clear();
+    private static void resetPotAndDiscardHands(Jugador userJugador){
+        juego.returnBet();
+        userJugador.getHand().clear();
+        juego.getDealer().getHand().clear();
     }
 
-    private static void playerHitsOrStays(Player userPlayer){
+    private static void playerHitsOrStays(Jugador userJugador){
         String input;
         do {
             input=forceHitOrStay();
             if ("pide".equalsIgnoreCase(input)) {
-                game.dealCard(userPlayer);
+                juego.dealCard(userJugador);
             }
-            displayPlayerHandAndScore(userPlayer);
-        } while ("pide".equalsIgnoreCase(input) && (userPlayer.calculateScore() <= 21));
+            displayPlayerHandAndScore(userJugador);
+        } while ("pide".equalsIgnoreCase(input) && (userJugador.calculateScore() <= 21));
     }
 
     private static String forceHitOrStay(){
@@ -99,37 +99,37 @@ public class Console {
     }
 
     private static void displayDealerCardShowing(){
-        System.out.println(" la maquina tiene: "+game.getDealer().getHand().get(0).toString());
+        System.out.println(" la maquina tiene: "+ juego.getDealer().getHand().get(0).toString());
     }
 
-    private static void displayPlayerHandAndScore(Player userPlayer){
-        Card card;
-        for (int i=0; i<userPlayer.getHand().size(); i++)
+    private static void displayPlayerHandAndScore(Jugador userJugador){
+        Cartas cartas;
+        for (int i = 0; i< userJugador.getHand().size(); i++)
         {
-            card=userPlayer.getHand().get(i);
-            if (i!=userPlayer.getHand().size()-1)
-                System.out.print(card.getTopCardRepresentation());
+            cartas = userJugador.getHand().get(i);
+            if (i!= userJugador.getHand().size()-1)
+                System.out.print(cartas.getTopCardRepresentation());
             else
-                System.out.println(card.toString());
+                System.out.println(cartas.toString());
         }
-        System.out.println(" ti tienes: " + userPlayer.calculateScore());
+        System.out.println(" ti tienes: " + userJugador.calculateScore());
     }
 
-    private static void playerBets(Player userPlayer){
+    private static void playerBets(Jugador userJugador){
         Double betAmount;
         String input;
-        input=forcePlayerBet(userPlayer);
+        input=forcePlayerBet(userJugador);
         betAmount=Double.valueOf(input);
-        userPlayer.makeBet(betAmount);
-        game.addToPot(betAmount);
+        userJugador.makeBet(betAmount);
+        juego.addToPot(betAmount);
     }
 
-    private static String forcePlayerBet(Player userPlayer){
+    private static String forcePlayerBet(Jugador userJugador){
         String input;
         do {
             input=forceDoubleInput();
         }
-        while (!userPlayer.hasMoneyToMakeBet(Double.valueOf(input)));
+        while (!userJugador.hasMoneyToMakeBet(Double.valueOf(input)));
         return (input);
     }
 

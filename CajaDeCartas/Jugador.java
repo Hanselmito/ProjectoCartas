@@ -7,8 +7,8 @@ import java.util.ArrayList;
 * money lo busque por paginas y videos para averiguar poder jugar apostando
 * score para ver la puntuacion
  */
-public class Player {
-    private ArrayList<Card> hand;
+public class Jugador {
+    private ArrayList<Cartas> hand;
     private String name;
     private Double money;
     private Integer score;
@@ -18,22 +18,22 @@ public class Player {
     * el nombre del jugador
     * y con el dinero que nos dan y la que queremos apostar
      */
-    public Player(){
-        hand = new ArrayList<Card>(2);
+    public Jugador(){
+        hand = new ArrayList<Cartas>(2);
         name="jugador";
         money = 500.0;
         score = 0;
     }
-    public Player(Double passedMoney){
+    public Jugador(Double passedMoney){
         this();
         money=passedMoney;
     }
-    public Player(String name, Double passedMoney){
+    public Jugador(String name, Double passedMoney){
         this();
         money=passedMoney;
         this.name=name;
     }
-    public Player(String name) {
+    public Jugador(String name) {
         this();
         this.name = name;
     }
@@ -54,13 +54,13 @@ public class Player {
         return score;
     }
 
-    public ArrayList<Card> getHand() {
+    public ArrayList<Cartas> getHand() {
         return hand;
     }
 
     // blackjack hit
-    public void addToHand(Card card) {
-        hand.add(card);
+    public void addToHand(Cartas cartas) {
+        hand.add(cartas);
     }
 
     public boolean hasMoneyToMakeBet(Double amount) {
@@ -72,8 +72,8 @@ public class Player {
     }
 
     public boolean isAceInHand() {
-        for(Card card: hand) {
-            if(card.getValue() == 1) {
+        for(Cartas cartas : hand) {
+            if(cartas.getValue() == 1) {
                 return true;
             }
         }
@@ -85,8 +85,8 @@ public class Player {
      */
     public Integer calculateScore() {
         int sum = 0;
-        for(Card card: hand) {
-            sum += card.getValue();
+        for(Cartas cartas : hand) {
+            sum += cartas.getValue();
         }
 
         if(isAceInHand() && sum <= 11) {

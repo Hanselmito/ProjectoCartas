@@ -1,11 +1,11 @@
 package CajaDeCartas;
 
-public class Card
+public class Cartas
 {
     /*
     *la creacion de las cartas con formas de formalas con otros metodos que e encotrado.
      */
-    private Suit suit;
+    private regla regla;
     public static String[] suitSymbols = {"♡", "♢", "♧", "♤"};
     public static String[] faceSymbols = {"A", "J", "Q", "K"};
     private Integer value;
@@ -13,7 +13,7 @@ public class Card
     private String bottomCardRepresentation;
     private static String middleCardRepresentation="|     |";
 
-    private Card(){
+    private Cartas(){
     }
 
     @Override
@@ -25,16 +25,16 @@ public class Card
     }
 
 
-    public Card(Suit passedSuit, Integer passedValue){
+    public Cartas(regla passedRegla, Integer passedValue){
 
-        this(passedSuit, passedValue, "X");
+        this(passedRegla, passedValue, "X");
     }
-    public Card(Suit passedSuit, Integer passedValue, String passedSuitRepresentation){
+    public Cartas(regla passedRegla, Integer passedValue, String passedSuitRepresentation){
 
-        this(passedSuit, passedValue, passedSuitRepresentation, "Y");
+        this(passedRegla, passedValue, passedSuitRepresentation, "Y");
     }
-    public Card(Suit passedSuit, Integer passedValue, String passedSuitRepresentation, String passedFaceRepresentation){
-        suit=passedSuit;
+    public Cartas(regla passedRegla, Integer passedValue, String passedSuitRepresentation, String passedFaceRepresentation){
+        regla = passedRegla;
         value=passedValue;
         topCardRepresentation=" ----- "+
                               "|"+String.format("%2s%-3s", passedFaceRepresentation, passedSuitRepresentation)+"|";
@@ -46,8 +46,8 @@ public class Card
         return value;
     }
 
-    public Suit getSuit(){
-        return suit;
+    public regla getSuit(){
+        return regla;
     }
 
 }
