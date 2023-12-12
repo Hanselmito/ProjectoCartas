@@ -46,20 +46,20 @@ public class Game {
     }
 
     public boolean playerWins() {
-        // if both player and dealer scores are = to 21 dealer wins
-        // if both player and dealer score are over 21 then dealer wins
-        // if player's score is <= 21 and players score is greater than dealers score then player wins.
-        //if dealer's score is > 21 and player's score is <= 21 then players wins.
+        // si las puntuaciones del jugador y de la casa son = hasta 21 victorias de la casa
+        // si la puntuación tanto del jugador como de la casa es superior a 21, entonces la casa gana
+        // si la puntuación del jugador es <= 21 y la puntuación de los jugadores es mayor que la puntuación de la casa, entonces el jugador gana.
+        //si la puntuación de la casa es > 21 y la puntuación del jugador es <= 21, entonces el jugador gana.
         player.calculateScore();
         dealer.calculateScore();
 
         if(     (player.getScore().equals(21) && !dealer.getScore().equals(21)) ||
                 (player.getScore()<21 && dealer.getScore() < player.getScore()) ||
                 (player.getScore() < 21 && dealer.getScore() > 21)) {
-            //Player wins
+            //jugador gana
             return true;
         }
-        //Dealer wins
+        //la casa gana
         return false;
     }
 
