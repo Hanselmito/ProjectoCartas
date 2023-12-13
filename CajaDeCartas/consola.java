@@ -9,6 +9,9 @@ public class consola {
     private static Juego juego = new Juego();
     private static Scanner scanner = new Scanner (System.in);
 
+    /**
+     * el menu para jugar
+     */
     public static void run(){
 
         Jugador usuarioJugador = juego.CojerJugador();
@@ -31,7 +34,7 @@ public class consola {
 
         do {
             juego.Empezar();
-            playerBets(usuarioJugador);
+            ApuestasDelJugador(usuarioJugador);
             ConfigurarJugadorManoyPuntos(usuarioJugador);
             displayDealerCardShowing();
             JugadorPedir0Parar(usuarioJugador);
@@ -42,6 +45,14 @@ public class consola {
         System.out.println("Gracias por jugar👨‍🦽! Adios!");
     }
 
+    /**
+     * cuando empiesas la partida te muestra la cantidad de dineros que te dan
+     * y con el else te lo dice cuando no tienes mas que apostar
+     *
+     * y tambien te muestra si quieres segir jugando o no
+     * @param usuarioJugador
+     * @return
+     */
     private static boolean JugadorEsperaRonda(Jugador usuarioJugador) {
         String input;
         System.out.println(" tu tienes " + ForsarDecimalesDouble(usuarioJugador.getDinero().toString()));
@@ -62,6 +73,12 @@ public class consola {
         return false;
     }
 
+    /**
+     * aqui te mostraria despues de parar de apostar en la partida si has ganado o has perdido.
+     *
+     * y tambien te mostraria cuanto tenia la maquina.
+     * @param usuarioJugador
+     */
     private static void DeterminaGana0Pierde(Jugador usuarioJugador){
 
         if (juego.JugadorGana()) {
@@ -73,12 +90,21 @@ public class consola {
         VolveraEmpesaryQuitarcartas(usuarioJugador);
     }
 
+    /**
+     * cuando hayas ganado o perdido mientras tengas dinero que apostar te preguntaran si quieres jugar otra ves
+     * y actuaria el programa de volver a empesar y quitar y dar cartas nuevas
+     * @param usuarioJugador
+     */
     private static void VolveraEmpesaryQuitarcartas(Jugador usuarioJugador){
         juego.RepetirApuesta();
         usuarioJugador.getmanos().clear();
         juego.CojerDistribusion().getmanos().clear();
     }
 
+    /**
+     * si el jugador pide carta para continuar o para, para terminar
+     * @param usuarioJugador
+     */
     private static void JugadorPedir0Parar(Jugador usuarioJugador){
         String input;
         do {
@@ -90,6 +116,10 @@ public class consola {
         } while ("pide".equalsIgnoreCase(input) && (usuarioJugador.calculatePuntos() <= 21));
     }
 
+    /**
+     * para pedir o parar tu mismo
+     * @return
+     */
     private static String ForsarSiPedir0Parar(){
         String input;
         do {
@@ -103,6 +133,10 @@ public class consola {
         System.out.println(" la maquina tiene: "+ juego.CojerDistribusion().getmanos().get(0).toString());
     }
 
+    /**
+     * configurar las cartas de la mano del jugador
+     * @param usuarioJugador
+     */
     private static void ConfigurarJugadorManoyPuntos(Jugador usuarioJugador){
         Cartas cartas;
         for (int i = 0; i< usuarioJugador.getmanos().size(); i++)
@@ -116,25 +150,34 @@ public class consola {
         System.out.println(" ti tienes: " + usuarioJugador.calculatePuntos());
     }
 
-    private static void playerBets(Jugador usuarioJugador){
+    /**
+     * para que pueda apostar el jugador
+     * @param usuarioJugador
+     */
+    private static void ApuestasDelJugador(Jugador usuarioJugador){
         Double betAmount;
         String input;
-        input=forcePlayerBet(usuarioJugador);
+        input=ForsarApuestaDelJugador(usuarioJugador);
         betAmount=Double.valueOf(input);
         usuarioJugador.makeBet(betAmount);
         juego.AñadeApuesta(betAmount);
     }
 
-    private static String forcePlayerBet(Jugador usuarioJugador){
+    /**
+     * para que puedas decir tu cuanto quieres apostar
+     * @param usuarioJugador
+     * @return
+     */
+    private static String ForsarApuestaDelJugador(Jugador usuarioJugador){
         String input;
         do {
-            input=forceDoubleInput();
+            input=ForsarDoubleInput();
         }
         while (!usuarioJugador.CuantoDineroAcumulamos(Double.valueOf(input)));
         return (input);
     }
 
-    private static String forceDoubleInput() {
+    private static String ForsarDoubleInput() {
         String input;
         do {
             System.out.print("cuanto quieres apostar?  ");
@@ -162,18 +205,33 @@ public class consola {
         return (true);
     }
 
+    /**
+     * decir si pedir carta o parar
+     * @param passedString
+     * @return
+     */
     public static boolean DecirSipedir0Parar(String passedString)
     {
         return ("pide".equalsIgnoreCase(passedString) ||
                 "paso".equalsIgnoreCase(passedString));
     }
 
+    /**
+     * decir si segir o parar de jugar
+     * @param passedString
+     * @return
+     */
     public static boolean DecirSi0No(String passedString)
     {
         return ("si".equalsIgnoreCase(passedString) ||
                 "no".equalsIgnoreCase(passedString));
     }
 
+    /**
+     * para poder utilizar decimales que son centimos
+     * @param input
+     * @return
+     */
     public static String ForsarDecimalesDouble(String input){
         if ( !(input.contains(".")) ||
                input.substring(input.indexOf("."), input.length()).length()==3)
