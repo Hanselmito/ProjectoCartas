@@ -2,12 +2,16 @@ package CajaDeCartas;
 
 public class Cartas
 {
-    /*
-    *la creacion de las cartas con formas de formalas con otros metodos que e encotrado.
+
+
+    /**
+     *crear las cartas con sus simbolos e letras si son mayor de 9
+     * el valor de cada carta
+     * EnsimaCarta, BajoCarta, EnmedioCarta es la posision de la carta
      */
     private Sinvolos Sinvolos;
     public static String[] Sinvolo = {"♡", "♢", "♧", "♤"};
-    public static String[] SinvoloDeLaCarta = {"A", "J", "Q", "K"};
+    public static String[] LetraDeLaCarta = {"A", "J", "Q", "K"};
     private Integer valor;
     private String EnsimaCarta;
     private String BajoCarta;

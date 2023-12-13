@@ -34,12 +34,12 @@ public class mazo {
                 if (valor < 11)
                 {
                     if (valor==1)
-                        cartas.add(new Cartas(Sinvolos, valor, Cartas.Sinvolo[Sinvolos.ordinal()], Cartas.SinvoloDeLaCarta[0]));
+                        cartas.add(new Cartas(Sinvolos, valor, Cartas.Sinvolo[Sinvolos.ordinal()], Cartas.LetraDeLaCarta[0]));
                     else
                         cartas.add(new Cartas(Sinvolos, valor, Cartas.Sinvolo[Sinvolos.ordinal()], ""+valor));
                 }
                 else
-                    cartas.add(new Cartas(Sinvolos, 10, Cartas.Sinvolo[Sinvolos.ordinal()], Cartas.SinvoloDeLaCarta[valor - 10]));
+                    cartas.add(new Cartas(Sinvolos, 10, Cartas.Sinvolo[Sinvolos.ordinal()], Cartas.LetraDeLaCarta[valor - 10]));
 
             }
         }
