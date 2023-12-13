@@ -15,7 +15,7 @@ public class Cartas
     private Integer valor;
     private String EnsimaCarta;
     private String BajoCarta;
-    private static String EnmedioCarta="|     |";
+    private static String EnmedioCarta="|     |\n";
 
     private Cartas(){
     }
@@ -40,10 +40,10 @@ public class Cartas
     public Cartas(Sinvolos ponerSinvolos, Integer ponerValor, String PonerRepresentacionSimvolos, String PonerRepresentacionDeLaCara){
         Sinvolos = ponerSinvolos;
         valor=ponerValor;
-        EnsimaCarta=" ----- "+
-                              "|"+String.format("%2s%-3s", PonerRepresentacionDeLaCara, PonerRepresentacionSimvolos)+"|";
-        BajoCarta="|"+String.format("%4s%s", PonerRepresentacionDeLaCara, PonerRepresentacionSimvolos)+"|"+
-                                 " ----- ";
+        EnsimaCarta=" ----- \n"+
+                              "|"+String.format("%2s%-3s", PonerRepresentacionDeLaCara, PonerRepresentacionSimvolos)+"|\n";
+        BajoCarta="|"+String.format("%4s%s", PonerRepresentacionDeLaCara, PonerRepresentacionSimvolos)+"|\n"+
+                                 " ----- \n";
     }
 
     public Integer getValor(){
