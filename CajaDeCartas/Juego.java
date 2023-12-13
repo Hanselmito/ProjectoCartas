@@ -9,30 +9,64 @@ public class Juego {
     private Jugador Distribuir;
     private Double Apuestas;
 
+    /**
+     * crea una nueva instancia de la clase Jugador y la asigna a la variable jugador.
+     * Esto representa al jugador humano en el juego.
+     *
+     * crea una nueva instancia de la clase mazo y la asigna a la variable mazo.
+     * Esto representa el mazo de cartas que se utilizará en el juego.
+     *
+     * crea una nueva instancia de la clase Jugador con el nombre “Dealer” y la asigna a la variable Distribuir.
+     * Esto representa al repartidor en el juego.
+     *
+     * llama al método shuffle() en la instancia mazo. Esto baraja el mazo de cartas.
+     *
+     * inicializa la variable Apuestas a 0.0. Esto representa la cantidad total de dinero apostado en el juego.
+     * Al inicio del juego, la apuesta es 0.0.
+     */
     public Juego(){
         jugador = new Jugador();
         mazo = new mazo();
-        Distribuir = new Jugador("Dealer");
+        Distribuir = new Jugador("");
         mazo.shuffle();
         Apuestas = 0.0;
     }
 
+    /**
+     * recoje apuesta y debielve apuesta
+     * @return
+     */
     public Double getPot() {
         return Apuestas;
     }
 
+    /**
+     * acumula las apuestas que hemos ganado
+     * @param amontonar
+     */
     public void AñadeApuesta(Double amontonar) {
         this.Apuestas += amontonar;
     }
 
+    /**
+     * llamamos al jugador
+     * @return
+     */
     public Jugador CojerJugador() {
         return jugador;
     }
 
+    /**
+     * llamar distribusion
+     * @return
+     */
     public Jugador CojerDistribusion() {
         return Distribuir;
     }
 
+    /**
+     * empesamos la partida con 2 cartas con este metodo
+     */
     public void Empezar() {
 
         //Reparte dos cartas al jugador y a la maquina
@@ -62,11 +96,18 @@ public class Juego {
         return false;
     }
 
+    /**
+     * destribuir la reparticion de las cartas
+     * @param jugadorRecibeCarta
+     */
     public void DistribuirCartas(Jugador jugadorRecibeCarta){
         Cartas cartas = mazo.getCartas();
-        jugadorRecibeCarta.addToHand(cartas);
+        jugadorRecibeCarta.AñadeALaMano(cartas);
     }
 
+    /**
+     * pedir carta hasta perder o sacar 21 que es blackjack
+     */
     public void PedirDistribucionAstaTerminar() {
         while (Distribuir.calculatePuntos() <= 17)
         {
@@ -74,6 +115,9 @@ public class Juego {
         }
     }
 
+    /**
+     * volver a repetir la apuesta
+     */
     public void RepetirApuesta() {
         if (JugadorGana()) {
             jugador.ReciveGanador(Apuestas * 2);

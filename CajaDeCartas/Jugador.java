@@ -24,13 +24,24 @@ public class Jugador {
         Dinero = 500.0;
         puntos = 0;
     }
+
+    /**
+     * para pasar el dinero ganado
+     * @param PasarDinero
+     */
     public Jugador(Double PasarDinero){
         this();
         Dinero=PasarDinero;
     }
-    public Jugador(String Nombre, Double pasasMoney){
+
+    /**
+     * pasar el dinero ganado al nombre del jugador
+     * @param Nombre
+     * @param pasarDinero
+     */
+    public Jugador(String Nombre, Double pasarDinero){
         this();
-        Dinero=pasasMoney;
+        Dinero=pasarDinero;
         this.Nombre=Nombre;
     }
     public Jugador(String Nombre) {
@@ -38,6 +49,10 @@ public class Jugador {
         this.Nombre = Nombre;
     }
 
+    /**
+     * cojer el nombre y poner el nombre
+     * @return
+     */
     public String getNombre() {
         return Nombre;
     }
@@ -46,24 +61,36 @@ public class Jugador {
         this.Nombre = Nombre;
     }
 
+    /**
+     * cojer el dinero
+     * @return
+     */
     public Double getDinero() {
         return Dinero;
     }
 
+    /**
+     * cojer los puntos
+     * @return
+     */
     public Integer getpuntos() {
         return puntos;
     }
 
+    /**
+     * cojer las cartas de la mano
+     * @return
+     */
     public ArrayList<Cartas> getmanos() {
         return Mano;
     }
 
-    // blackjack hit
-    public void addToHand(Cartas cartas) {
+    // blackjack pedir
+    public void AñadeALaMano(Cartas cartas) {
         Mano.add(cartas);
     }
 
-    public boolean hasMoneyToMakeBet(Double amount) {
+    public boolean CuantoDineroAcumulamos(Double amount) {
         return (amount <= Dinero);
     }
 

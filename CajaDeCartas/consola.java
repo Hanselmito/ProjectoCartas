@@ -130,7 +130,7 @@ public class consola {
         do {
             input=forceDoubleInput();
         }
-        while (!usuarioJugador.hasMoneyToMakeBet(Double.valueOf(input)));
+        while (!usuarioJugador.CuantoDineroAcumulamos(Double.valueOf(input)));
         return (input);
     }
 
