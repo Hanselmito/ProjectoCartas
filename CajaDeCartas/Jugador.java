@@ -24,9 +24,9 @@ public class Jugador {
         Dinero = 500.0;
         puntos = 0;
     }
-    public Jugador(Double passedMoney){
+    public Jugador(Double PasarDinero){
         this();
-        Dinero=passedMoney;
+        Dinero=PasarDinero;
     }
     public Jugador(String Nombre, Double pasasMoney){
         this();
@@ -71,7 +71,7 @@ public class Jugador {
         Dinero -= amontonar;
     }
 
-    public boolean isAceInHand() {
+    public boolean ElAzDeLaCarta() {
         for(Cartas cartas : Mano) {
             if(cartas.getValor() == 1) {
                 return true;
@@ -89,7 +89,7 @@ public class Jugador {
             sum += cartas.getValor();
         }
 
-        if(isAceInHand() && sum <= 11) {
+        if(ElAzDeLaCarta() && sum <= 11) {
             sum += 10;
         }
         puntos = sum;
@@ -97,7 +97,7 @@ public class Jugador {
         return sum;
     }
 
-    public void receiveWinnings(Double amount) {
+    public void ReciveGanador(Double amount) {
         Dinero += amount;
     }
 }

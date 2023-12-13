@@ -19,40 +19,40 @@ public class consola {
         System.out.println("|                                          |");
         System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
 
-        System.out.println(" vien venido jugador cual es tu nombre ");
+        System.out.println(" bienvenido jugador cual es tu nombre ");
 
         String userName = getInput();
         usuarioJugador.setNombre(userName);
 
         System.out.println(" Hola " + userName + "!");
 
-        System.out.println(" tienes "+forceTwoDecimalDouble(usuarioJugador.getDinero().toString()));
+        System.out.println(" tienes "+ForsarDecimalesDouble(usuarioJugador.getDinero().toString()));
 
         do {
             juego.start();
             playerBets(usuarioJugador);
-            displayPlayerHandAndScore(usuarioJugador);
+            ConfigurarJugadorManoyPuntos(usuarioJugador);
             displayDealerCardShowing();
-            playerHitsOrStays(usuarioJugador);
+            JugadorPedir0Parar(usuarioJugador);
             juego.dealerHitUntilFinished();
             DeterminaGana0Pierde(usuarioJugador);
-        } while (playerStaysForAnotherRound(usuarioJugador));
+        } while (JugadorEsperaRonda(usuarioJugador));
 
         System.out.println("Gracias por jugar👨‍🦽! Adios!");
     }
 
-    private static boolean playerStaysForAnotherRound(Jugador usuarioJugador) {
+    private static boolean JugadorEsperaRonda(Jugador usuarioJugador) {
         String input;
-        System.out.println(" tu tienes " + forceTwoDecimalDouble(usuarioJugador.getDinero().toString()));
+        System.out.println(" tu tienes " + ForsarDecimalesDouble(usuarioJugador.getDinero().toString()));
         if (usuarioJugador.getDinero() >= 0.20) {
             do {
                 System.out.print("quieres probar de nuevo? [si/No]  ");
                 input = getInput();
-                if (isInputYesOrNo(input))
+                if (DecirSi0No(input))
                 {
                     return ("si".equalsIgnoreCase(input));
                 }
-            } while (!isInputYesOrNo(input));
+            } while (!DecirSi0No(input));
 
         }
         else {
@@ -63,38 +63,38 @@ public class consola {
 
     private static void DeterminaGana0Pierde(Jugador usuarioJugador){
 
-        if (juego.playerWins()) {
+        if (juego.JugadorGana()) {
             System.out.println(" tu ganas !");
         } else {
             System.out.println(" la maquina gana !");
         }
         System.out.println(" la maquina tiene: " + juego.getDealer().getpuntos());
-        resetPotAndDiscardHands(usuarioJugador);
+        VolveraEmpesaryQuitarcartas(usuarioJugador);
     }
 
-    private static void resetPotAndDiscardHands(Jugador usuarioJugador){
+    private static void VolveraEmpesaryQuitarcartas(Jugador usuarioJugador){
         juego.returnBet();
         usuarioJugador.getmanos().clear();
         juego.getDealer().getmanos().clear();
     }
 
-    private static void playerHitsOrStays(Jugador usuarioJugador){
+    private static void JugadorPedir0Parar(Jugador usuarioJugador){
         String input;
         do {
-            input=forceHitOrStay();
+            input=ForsarSiPedir0Parar();
             if ("pide".equalsIgnoreCase(input)) {
                 juego.dealCard(usuarioJugador);
             }
-            displayPlayerHandAndScore(usuarioJugador);
+            ConfigurarJugadorManoyPuntos(usuarioJugador);
         } while ("pide".equalsIgnoreCase(input) && (usuarioJugador.calculatePuntos() <= 21));
     }
 
-    private static String forceHitOrStay(){
+    private static String ForsarSiPedir0Parar(){
         String input;
         do {
             System.out.print(" pides o pasas? ");
             input = getInput();
-        } while (!isInputStayOrHit(input));
+        } while (!DecirSipedir0Parar(input));
         return input;
     }
 
@@ -102,7 +102,7 @@ public class consola {
         System.out.println(" la maquina tiene: "+ juego.getDealer().getmanos().get(0).toString());
     }
 
-    private static void displayPlayerHandAndScore(Jugador usuarioJugador){
+    private static void ConfigurarJugadorManoyPuntos(Jugador usuarioJugador){
         Cartas cartas;
         for (int i = 0; i< usuarioJugador.getmanos().size(); i++)
         {
@@ -139,7 +139,7 @@ public class consola {
             System.out.print("cuanto quieres apostar?  ");
             input = getInput();
         } while (!isInputDouble(input) || !isInputPositive(input));
-        return forceTwoDecimalDouble(input);
+        return ForsarDecimalesDouble(input);
     }
 
     private static String getInput()
@@ -161,19 +161,19 @@ public class consola {
         return (true);
     }
 
-    public static boolean isInputStayOrHit(String passedString)
+    public static boolean DecirSipedir0Parar(String passedString)
     {
         return ("pide".equalsIgnoreCase(passedString) ||
                 "paso".equalsIgnoreCase(passedString));
     }
 
-    public static boolean isInputYesOrNo(String passedString)
+    public static boolean DecirSi0No(String passedString)
     {
         return ("si".equalsIgnoreCase(passedString) ||
                 "no".equalsIgnoreCase(passedString));
     }
 
-    public static String forceTwoDecimalDouble(String input){
+    public static String ForsarDecimalesDouble(String input){
         if ( !(input.contains(".")) ||
                input.substring(input.indexOf("."), input.length()).length()==3)
         {
