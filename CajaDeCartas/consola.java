@@ -13,12 +13,12 @@ public class consola {
 
         Jugador usuarioJugador = juego.getPlayer();
 
-        System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
-        System.out.println("|     ///////////////////////////////      |");
-        System.out.println("|    🔥💎CASINO EL PUNTO CALIENTE💎🔥      |");
-        System.out.println("|                 SI/NO                    |");
-        System.out.println("|     //////////////////////////////       |");
-        System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+        System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+        System.out.println("|      ///////////////////////////////      |");
+        System.out.println("|     🔥💎CASINO EL PUNTO CALIENTE💎🔥      |");
+        System.out.println("|                  SI/NO                    |");
+        System.out.println("|      //////////////////////////////       |");
+        System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
 
         System.out.println(" bienvenido jugador cual es tu nombre ");
 
