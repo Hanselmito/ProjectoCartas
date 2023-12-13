@@ -1,43 +1,45 @@
 package CajaDeCartas;
 
-
+/**
+ * crear los datos jugador, mazo, distribuicion, apuestas
+ */
 public class Juego {
     private Jugador jugador;
     private mazo mazo;
     private Jugador Distribuir;
-    private Double Pot;
+    private Double Apuestas;
 
     public Juego(){
         jugador = new Jugador();
         mazo = new mazo();
         Distribuir = new Jugador("Dealer");
         mazo.shuffle();
-        Pot = 0.0;
+        Apuestas = 0.0;
     }
 
     public Double getPot() {
-        return Pot;
+        return Apuestas;
     }
 
-    public void addToPot(Double amount) {
-        this.Pot += amount;
+    public void AñadeApuesta(Double amontonar) {
+        this.Apuestas += amontonar;
     }
 
-    public Jugador getPlayer() {
+    public Jugador CojerJugador() {
         return jugador;
     }
 
-    public Jugador getDealer() {
+    public Jugador CojerDistribusion() {
         return Distribuir;
     }
 
-    public void start() {
+    public void Empezar() {
 
-        //Deal two cards to the player and the Distribuir
+        //Reparte dos cartas al jugador y a la maquina
         for (int i = 0; i < 2; i++)
         {
-            dealCard(jugador);
-            dealCard(Distribuir);
+            DistribuirCartas(jugador);
+            DistribuirCartas(Distribuir);
         }
 
     }
@@ -60,24 +62,24 @@ public class Juego {
         return false;
     }
 
-    public void dealCard(Jugador jugadorToReceiveCard){
+    public void DistribuirCartas(Jugador jugadorRecibeCarta){
         Cartas cartas = mazo.getCartas();
-        jugadorToReceiveCard.addToHand(cartas);
+        jugadorRecibeCarta.addToHand(cartas);
     }
 
-    public void dealerHitUntilFinished() {
+    public void PedirDistribucionAstaTerminar() {
         while (Distribuir.calculatePuntos() <= 17)
         {
-            dealCard(Distribuir);
+            DistribuirCartas(Distribuir);
         }
     }
 
-    public void returnBet() {
+    public void RepetirApuesta() {
         if (JugadorGana()) {
-            jugador.ReciveGanador(Pot * 2);
+            jugador.ReciveGanador(Apuestas * 2);
         }
         else {
-            this.Pot = 0.0;
+            this.Apuestas = 0.0;
         }
     }
 }

@@ -11,7 +11,7 @@ public class consola {
 
     public static void run(){
 
-        Jugador usuarioJugador = juego.getPlayer();
+        Jugador usuarioJugador = juego.CojerJugador();
 
         System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
         System.out.println("|      ///////////////////////////////      |");
@@ -30,12 +30,12 @@ public class consola {
         System.out.println(" tienes "+ForsarDecimalesDouble(usuarioJugador.getDinero().toString()));
 
         do {
-            juego.start();
+            juego.Empezar();
             playerBets(usuarioJugador);
             ConfigurarJugadorManoyPuntos(usuarioJugador);
             displayDealerCardShowing();
             JugadorPedir0Parar(usuarioJugador);
-            juego.dealerHitUntilFinished();
+            juego.PedirDistribucionAstaTerminar();
             DeterminaGana0Pierde(usuarioJugador);
         } while (JugadorEsperaRonda(usuarioJugador));
 
@@ -69,14 +69,14 @@ public class consola {
         } else {
             System.out.println(" la maquina gana !");
         }
-        System.out.println(" la maquina tiene: " + juego.getDealer().getpuntos());
+        System.out.println(" la maquina tiene: " + juego.CojerDistribusion().getpuntos());
         VolveraEmpesaryQuitarcartas(usuarioJugador);
     }
 
     private static void VolveraEmpesaryQuitarcartas(Jugador usuarioJugador){
-        juego.returnBet();
+        juego.RepetirApuesta();
         usuarioJugador.getmanos().clear();
-        juego.getDealer().getmanos().clear();
+        juego.CojerDistribusion().getmanos().clear();
     }
 
     private static void JugadorPedir0Parar(Jugador usuarioJugador){
@@ -84,7 +84,7 @@ public class consola {
         do {
             input=ForsarSiPedir0Parar();
             if ("pide".equalsIgnoreCase(input)) {
-                juego.dealCard(usuarioJugador);
+                juego.DistribuirCartas(usuarioJugador);
             }
             ConfigurarJugadorManoyPuntos(usuarioJugador);
         } while ("pide".equalsIgnoreCase(input) && (usuarioJugador.calculatePuntos() <= 21));
@@ -100,7 +100,7 @@ public class consola {
     }
 
     private static void displayDealerCardShowing(){
-        System.out.println(" la maquina tiene: "+ juego.getDealer().getmanos().get(0).toString());
+        System.out.println(" la maquina tiene: "+ juego.CojerDistribusion().getmanos().get(0).toString());
     }
 
     private static void ConfigurarJugadorManoyPuntos(Jugador usuarioJugador){
@@ -122,7 +122,7 @@ public class consola {
         input=forcePlayerBet(usuarioJugador);
         betAmount=Double.valueOf(input);
         usuarioJugador.makeBet(betAmount);
-        juego.addToPot(betAmount);
+        juego.AñadeApuesta(betAmount);
     }
 
     private static String forcePlayerBet(Jugador usuarioJugador){
